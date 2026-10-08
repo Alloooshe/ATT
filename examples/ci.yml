@@ -1,0 +1,65 @@
+# Example CI shaped for the agent team. Copy it to .github/workflows/ci.yml and
+# replace the test commands. What the team relies on:
+#   * No run while a PR is a draft: agents push many times while iterating; the
+#     run starts when the PR is marked ready (or a train's PR is opened).
+#   * A PR's newer push cancels its older run; a push to the base branch never
+#     cancels the running one (a burst of merges would otherwise leave no full
+#     run finishing).
+#   * PRs run only what the change reaches ("changed" tests); the base branch
+#     runs everything after each merge. A red base run: revert, then diagnose.
+#   * A missing toolchain FAILS under CI=true instead of skipping, so green
+#     means the tests ran.
+#   * The `changes` job is listed in TEAM_CI_IGNORE_CHECKS, so it never counts
+#     as "tests passed" for the guarded merge.
+name: CI
+
+on:
+  push:
+    branches: [main, dev]            # your TEAM_BASE among them
+    paths-ignore: ["docs/**", "**/*.md"]
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  changes:
+    if: github.event_name != 'pull_request' || !github.event.pull_request.draft
+    runs-on: ubuntu-latest
+    outputs:
+      app: ${{ steps.filter.outputs.app }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          # On a push, compare with the previous commit, not the default branch.
+          base: ${{ github.event_name == 'push' && github.event.before || '' }}
+          filters: |
+            app: ["src/**", "tests/**", "pyproject.toml", ".github/workflows/ci.yml"]
+
+  tests:
+    needs: changes
+    if: needs.changes.outputs.app == 'true'
+    name: Tests (${{ github.event_name == 'pull_request' && 'changed' || 'full' }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      CI: "true"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      # - set up your toolchain here
+      - name: Run tests
+        run: |
+          if [ "${{ github.event_name }}" = pull_request ]; then
+            # Only the tests the change can reach. Replace with your selector,
+            # e.g. a script mapping changed files to test files.
+            git diff --name-only "origin/${{ github.base_ref }}...HEAD" > changed.txt
+            echo "changed files:"; cat changed.txt
+            # your-test-runner $(your-selector < changed.txt)
+          fi
+          # your-test-runner   # full suite on pushes
