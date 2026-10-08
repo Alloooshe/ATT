@@ -2,7 +2,7 @@
 
 # ATT — Agent Team Template
 
-**Run a team of Claude Code agents on one repository: a PM, tech leads and coding agents, coordinated through one backlog and supervised around the clock.**
+**Run a team of Claude Code agents locally, on your own machine: a PM, tech leads and coding agents, coordinated through one backlog and supervised around the clock.**
 
 [![GitHub stars](https://img.shields.io/github/stars/Alloooshe/ATT?style=flat-square&logo=github)](https://github.com/Alloooshe/ATT/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/Alloooshe/ATT?style=flat-square&logo=github)](https://github.com/Alloooshe/ATT/network/members)
@@ -10,8 +10,10 @@
 [![Last commit](https://img.shields.io/github/last-commit/Alloooshe/ATT?style=flat-square)](https://github.com/Alloooshe/ATT/commits/main)
 [![Built for Claude Code](https://img.shields.io/badge/built%20for-Claude%20Code-D97757?style=flat-square)](https://claude.com/claude-code)
 [![Shell](https://img.shields.io/badge/scripts-bash-4EAA25?style=flat-square&logo=gnubash&logoColor=white)](scripts/)
+[![Local-first](https://img.shields.io/badge/runs-100%25%20local-6E56CF?style=flat-square)](#-local-first)
+[![Paper](https://img.shields.io/badge/paper-PDF-B31B1B?style=flat-square)](paper/att.pdf)
 
-[Quick start](#-quick-start) · [How it works](#-how-it-works) · [The roles](#-the-roles) · [Configuration](#%EF%B8%8F-configuration) · [Layout](#-repository-layout)
+[Results](#-results) · [Quick start](#-quick-start) · [How it works](#-how-it-works) · [The roles](#-the-roles) · [Configuration](#%EF%B8%8F-configuration) · [Layout](#-repository-layout)
 
 </div>
 
@@ -38,6 +40,28 @@ team:
   something costs a run, it is written down there.
 - 📱 **Phone-friendly.** The PM and the leads run as Remote Control sessions,
   so you can open one from the Claude app and steer it mid-task.
+
+## 📊 Results
+
+Tested locally on a real, private project over nine days (a field study, not a controlled benchmark; see the [paper](paper/att.pdf)):
+
+| | |
+|---|---|
+| Tasks filed by the PM agent | **~430** |
+| Tasks claimed → merged | **365 → 344** (94%) |
+| Median time, claim → merged | **1.3 h** (91% within 8 h) |
+| Merge trains | **21**, up to 37 PRs per CI run |
+| Reverts on the shared branch | **2** |
+| Lessons the agents wrote down | **83** |
+
+## 🏠 Local-first
+
+Everything runs on **your machine**: agents are `systemd` user units, each in
+its own git worktree, against your own CI runners. There is no hosted
+orchestrator and no external service beyond Claude Code and GitHub. You can
+`tail` any agent's log, read its handoff file, or stop it with one command.
+Memory is budgeted explicitly: coding agents run only a capped quick test, and
+heavy work goes through locks and memory scopes.
 
 ## 🧭 How it works
 
@@ -163,6 +187,7 @@ scripts/
 ├── agents/                   # supervise, start_team, team, status, base, pr_lock, quick_test, rc_setup
 └── lead/                     # automerge, train_merge, watch_agents
 examples/ci.yml               # CI that skips drafts and runs changed tests on PRs
+paper/                        # the field-study paper (LaTeX + PDF) and its analysis script
 ```
 
 ## 📋 Requirements

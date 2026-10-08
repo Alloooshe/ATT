@@ -1,0 +1,77 @@
+\begin{thebibliography}{11}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[{Anthropic}(2025)]{claudecode}
+{Anthropic}.
+\newblock Claude code.
+\newblock \url{https://claude.com/claude-code}, 2025.
+
+\bibitem[Hong et~al.(2023)]{hong2023metagpt}
+Sirui Hong et~al.
+\newblock {MetaGPT}: Meta programming for a multi-agent collaborative
+  framework.
+\newblock \emph{arXiv preprint arXiv:2308.00352}, 2023.
+
+\bibitem[Jimenez et~al.(2024)Jimenez, Yang, Wettig, Yao, Pei, Press, and
+  Narasimhan]{jimenez2024swebench}
+Carlos~E. Jimenez, John Yang, Alexander Wettig, Shunyu Yao, Kexin Pei, Ofir
+  Press, and Karthik Narasimhan.
+\newblock {SWE}-bench: Can language models resolve real-world {GitHub} issues?
+\newblock In \emph{International Conference on Learning Representations
+  (ICLR)}, 2024.
+\newblock arXiv:2310.06770.
+
+\bibitem[Liu et~al.(2023)Liu, Lin, Hewitt, Paranjape, Bevilacqua, Petroni, and
+  Liang]{liu2023lost}
+Nelson~F. Liu, Kevin Lin, John Hewitt, Ashwin Paranjape, Michele Bevilacqua,
+  Fabio Petroni, and Percy Liang.
+\newblock Lost in the middle: How language models use long contexts.
+\newblock \emph{arXiv preprint arXiv:2307.03172}, 2023.
+
+\bibitem[Mohammad(2026)]{att}
+Ali Mohammad.
+\newblock {ATT}: Agent team template.
+\newblock \url{https://github.com/Alloooshe/ATT}, 2026.
+
+\bibitem[Qian et~al.(2023)]{qian2023chatdev}
+Chen Qian et~al.
+\newblock {ChatDev}: Communicative agents for software development.
+\newblock \emph{arXiv preprint arXiv:2307.07924}, 2023.
+
+\bibitem[Shinn et~al.(2023)Shinn, Cassano, Berman, Gopinath, Narasimhan, and
+  Yao]{shinn2023reflexion}
+Noah Shinn, Federico Cassano, Edward Berman, Ashwin Gopinath, Karthik
+  Narasimhan, and Shunyu Yao.
+\newblock Reflexion: Language agents with verbal reinforcement learning.
+\newblock \emph{arXiv preprint arXiv:2303.11366}, 2023.
+
+\bibitem[Wang et~al.(2024)]{wang2024openhands}
+Xingyao Wang et~al.
+\newblock {OpenHands}: An open platform for {AI} software developers as
+  generalist agents.
+\newblock \emph{arXiv preprint arXiv:2407.16741}, 2024.
+
+\bibitem[Wu et~al.(2023)]{wu2023autogen}
+Qingyun Wu et~al.
+\newblock {AutoGen}: Enabling next-gen {LLM} applications via multi-agent
+  conversation.
+\newblock \emph{arXiv preprint arXiv:2308.08155}, 2023.
+
+\bibitem[Xia et~al.(2024)Xia, Deng, Dunn, and Zhang]{xia2024agentless}
+Chunqiu~Steven Xia, Yinlin Deng, Soren Dunn, and Lingming Zhang.
+\newblock Agentless: Demystifying {LLM}-based software engineering agents.
+\newblock \emph{arXiv preprint arXiv:2407.01489}, 2024.
+
+\bibitem[Yang et~al.(2024)Yang, Jimenez, Wettig, Lieret, Yao, Narasimhan, and
+  Press]{yang2024sweagent}
+John Yang, Carlos~E. Jimenez, Alexander Wettig, Kilian Lieret, Shunyu Yao,
+  Karthik Narasimhan, and Ofir Press.
+\newblock {SWE}-agent: Agent-computer interfaces enable automated software
+  engineering.
+\newblock \emph{arXiv preprint arXiv:2405.15793}, 2024.
+
+\end{thebibliography}
